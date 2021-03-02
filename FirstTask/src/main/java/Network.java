@@ -13,6 +13,15 @@ public class Network {
     static void displayInterfaceInformation(NetworkInterface netint) throws SocketException {
         out.println("Display name: " + netint.getDisplayName());
         out.println("Name: " + netint.getName());
+
+        byte[] hardwareAddress = netint.getHardwareAddress();
+        if (hardwareAddress != null) {
+            String[] hexadecimalFormat = new String[hardwareAddress.length];
+            for (int i = 0; i < hardwareAddress.length; i++) {
+                hexadecimalFormat[i] = String.format("%02X", hardwareAddress[i]);
+            }
+            out.println("Mac: " + String.join("-", hexadecimalFormat));
+        }
         Enumeration<InetAddress> inetAddresses = netint.getInetAddresses();
         for (InetAddress inetAddress : Collections.list(inetAddresses)) {
             out.println("InetAddress: " + inetAddress);
