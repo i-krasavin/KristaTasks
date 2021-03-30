@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Cat {
+public class Cat implements Serializable {
     private String name = "Barsick";
 
     private int weight = 20;
