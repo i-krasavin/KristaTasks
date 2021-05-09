@@ -1,0 +1,30 @@
+version: '3.9'
+
+services:
+  front:
+    container_name: front
+    build:
+      context: ./client/
+    restart: always
+    ports:
+      - "80:80"
+
+  api:
+    container_name: api
+    build:
+      context: ./server/
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    restart: always
+    ports:
+      - "8000:8000"
+
+  proxy:
+    container_name: proxy
+    build:
+        context: ./proxy/
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    restart: always
+    ports:
+      - "8080:8080"
